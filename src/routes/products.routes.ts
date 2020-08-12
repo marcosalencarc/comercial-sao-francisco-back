@@ -7,7 +7,7 @@ const productsRouter = Router();
  * Services
  */
 
-productsRouter.post('/', async (request, response) => {
+productsRouter.get('/', async (request, response) => {
   try {
     return response.json({ message: 'Hello' });
   } catch (err) {
