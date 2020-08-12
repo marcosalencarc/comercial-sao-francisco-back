@@ -1,1 +1,1 @@
-web: yarn tsc; yarn build-start
+web: yarn start
