@@ -7,3 +7,4 @@ Intalation guide
     4 - run migrations: yarn typeorm migration:run
 
 
+# comercial-sao-francisco-back
