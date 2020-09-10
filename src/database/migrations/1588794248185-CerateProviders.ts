@@ -14,10 +14,10 @@ export default class CerateProviders1588794248185
         columns: [
           {
             name: 'id',
-            type: 'int',
+            type: 'integer', // instead of 'int', required for the increment strategy
             isPrimary: true,
-            isUnique: true,
-            generationStrategy: 'increment',
+            isGenerated: true,
+            generationStrategy: 'increment'
           },
           {
             name: 'name',

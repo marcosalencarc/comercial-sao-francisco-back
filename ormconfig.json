@@ -1,10 +1,15 @@
 {
   "type": "postgres",
-  "host": "localhost",
+  "host": "ec2-184-73-249-9.compute-1.amazonaws.com",
   "port": 5432,
-  "username":"postgres",
-  "password": "docker",
-  "database": "comercial_sao_francisco",
+  "username":"zjebbgysazqiko",
+  "password": "e11ae099a4771cef92b4cfeee7021472550f4bac99beff47a62a25a7a920b1c7",
+  "database": "dfqjvauh4atmv2",
+  "extra": {
+    "ssl": {
+      "rejectUnauthorized": false
+    }
+  },
   "entities":[
     "./src/models/*.ts"
   ],
