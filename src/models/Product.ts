@@ -5,7 +5,7 @@ import {
   ManyToOne,
   JoinColumn,
 } from 'typeorm';
-import Category from './Categories';
+import Category from './Category';
 import Provider from './Providers';
 import Brand from './Brands';
 
@@ -66,7 +66,7 @@ class Product {
   discount: number;
 
   @Column()
-  comission: number;
+  commission: number;
 
   @Column()
   note: number;

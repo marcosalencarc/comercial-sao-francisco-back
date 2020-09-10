@@ -5,7 +5,7 @@ import {
   ManyToOne,
   JoinColumn,
 } from 'typeorm';
-import Category from './Categories';
+import Category from './Category';
 
 @Entity('providers')
 class Provider {
@@ -23,7 +23,7 @@ class Provider {
 
   @ManyToOne(() => Category)
   @JoinColumn({ name: 'category_id' })
-  provider: Category;
+  category: Category;
 }
 
 export default Provider;
