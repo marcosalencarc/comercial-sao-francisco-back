@@ -6,9 +6,9 @@ import CreateCategoryService from "../services/CreateCategorySevice";
 const categoriesRouter= Router()
 
 categoriesRouter.get('/', async (request, response) => {
-  const name = request.query.name != undefined ? request.query.name.toString() : "";
   const categoryRepository = getCustomRepository(CategoryRepository);
-  return response.json(await categoryRepository.findByName(name));
+  const name = request.query.name != undefined ? request.query.name.toString() : "";
+  return name != "" ? response.json(await categoryRepository.findByName(name)) : response.json(await categoryRepository.find());
 });
 
 categoriesRouter.post('/', async (request,response) =>{
