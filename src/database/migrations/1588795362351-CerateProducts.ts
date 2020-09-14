@@ -22,6 +22,11 @@ export default class CerateProducts1588795362351 implements MigrationInterface {
             name: 'name',
             type: 'varchar',
           },
+          {
+            name: 'is_active',
+            type: 'boolean',
+            isNullable: true,
+          },
         ],
       }),
     );
@@ -125,6 +130,16 @@ export default class CerateProducts1588795362351 implements MigrationInterface {
           {
             name: 'is_active',
             type: 'boolean',
+          },
+          {
+            name: 'created_at',
+            type: 'timestamp',
+            default: 'now()',
+          },
+          {
+            name: 'updated_at',
+            type: 'timestamp',
+            default: 'now()',
           },
         ],
       }),

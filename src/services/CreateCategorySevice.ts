@@ -6,13 +6,11 @@ import AppError from "../errors/AppErro";
 
 interface RequestDTO {
   name: string;
-  description: string;
 }
 
 class CreateCategoryService {
   public async execute({
     name,
-    description,
   }: RequestDTO): Promise<Category> {
     const categoryRepository = getCustomRepository(CategoryRepository);
     const nameUperCase = name.toUpperCase();
@@ -23,14 +21,14 @@ class CreateCategoryService {
 
     if (findCategorySomeName != null) {
       if (findCategorySomeName.length > 0) {
-        throw new AppError('This category is already exists', 400);
+        throw new AppError('Uma categoria com esse nome já foi cadastrada', 400);
       }
     }
 
-    const category = await categoryRepository.create({
-      name: nameUperCase,
-      description
+    const category = categoryRepository.create({
+      name:nameUperCase,
     });
+    
     await categoryRepository.save(category);
 
     return category;

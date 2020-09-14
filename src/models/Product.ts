@@ -24,10 +24,14 @@ class Product {
   @JoinColumn({ name: 'category_id' })
   category: Category;
 
-  @ManyToOne(() => Provider)
-  @JoinColumn({ name: 'provider_id' })
+  @ManyToOne(() => Provider, {cascade: ["update", "remove"]})
+  @JoinColumn({ name: 'provider_id'})
   provider: Provider;
 
+  @ManyToOne(() => Brand)
+  @JoinColumn({ name: 'brand_id' })
+  brand: Brand;
+  
   @Column()
   reference: string;
 
@@ -42,10 +46,6 @@ class Product {
 
   @Column()
   weight: number;
-
-  @ManyToOne(() => Brand)
-  @JoinColumn({ name: 'brand_id' })
-  brand: Brand;
 
   @Column()
   markup: number;
@@ -76,6 +76,12 @@ class Product {
 
   @Column()
   is_active: boolean;
+
+  @Column()
+  created_at: Date;
+
+  @Column()
+  updated_at: Date;
 }
 
 export default Product;
