@@ -1,9 +1,9 @@
 import { request, response, Router} from "express";
 import { getCustomRepository } from "typeorm";
 import CategoryRepository from "../repositories/CategoryRepository";
-import CreateCategoryService from "../services/CreateCategorySevice";
-import DeleteCategoryService from "../services/DeleteCategoryService";
-import UpdateCategoryService from "../services/UpdateCategoryService";
+import CreateCategoryService from "../services/categories/CreateCategorySevice";
+import DeleteCategoryService from "../services/categories/DeleteCategoryService";
+import UpdateCategoryService from "../services/categories/UpdateCategoryService";
 
 const categoriesRouter= Router()
 

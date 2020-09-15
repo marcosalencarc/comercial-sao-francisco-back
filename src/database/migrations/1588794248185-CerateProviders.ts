@@ -71,6 +71,7 @@ export default class CerateProviders1588794248185
         referencedColumnNames: ['id'],
         referencedTableName: 'categories',
         onUpdate: 'CASCADE',
+        onDelete: 'SET NULL'
       }),
     );
   }

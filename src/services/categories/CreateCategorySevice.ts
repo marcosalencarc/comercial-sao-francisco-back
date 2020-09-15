@@ -1,7 +1,7 @@
-import Category from "../models/Category";
+import Category from "../../models/Category";
 import { getCustomRepository } from "typeorm";
-import CategoryRepository from "../repositories/CategoryRepository";
-import AppError from "../errors/AppErro";
+import CategoryRepository from "../../repositories/CategoryRepository";
+import AppError from "../../errors/AppErro";
 
 
 interface RequestDTO {
@@ -10,7 +10,7 @@ interface RequestDTO {
 
 class CreateCategoryService {
   public async execute({
-    name,
+    name
   }: RequestDTO): Promise<Category> {
     const categoryRepository = getCustomRepository(CategoryRepository);
     const nameUperCase = name.toUpperCase();
