@@ -14,7 +14,7 @@ providersRoutes.get("/", async (request, response) => {
     const {name} = request.query
     if(name) return response.json(await providerRepository.findByFantasyOrCompanyName(name as string))
     
-    return response.json(await providerRepository.find())
+    return response.json(await providerRepository.findAll())
 
 })
 

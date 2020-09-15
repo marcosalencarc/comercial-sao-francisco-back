@@ -7,13 +7,15 @@ class DeleteProviderService {
   public async execute(id: string): Promise<void> {
     const providersRepository = getCustomRepository(ProviderRepository);
 
-    const exsitProvider = await providersRepository.findOne({
+    const findProvider = await providersRepository.findOne({
       where: { id },
     });
 
-    if (!exsitProvider) throw new AppError('Esse fornecedor não existe');
+    if (!findProvider) throw new AppError('Esse fornecedor não existe');
 
-    await providersRepository.delete(id);
+    findProvider.is_active = false
+
+    await providersRepository.save(findProvider);
   }
 }
 

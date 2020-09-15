@@ -24,7 +24,7 @@ class Provider {
   @Column()
   is_active: boolean
 
-  @ManyToOne(() => Category, {cascade: ["update", "remove"]})
+  @ManyToOne(() => Category)
   @JoinColumn({ name: 'category_id' })
   category: Category;
 }
