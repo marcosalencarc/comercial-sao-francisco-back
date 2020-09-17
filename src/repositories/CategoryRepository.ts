@@ -20,6 +20,15 @@ class CategoryRepository extends Repository<Category> {
     });
     return findCategory || null;
   }
+
+  public async findByExactName(name: string): Promise<Category | null> {
+    const findCategory = await this.findOne({
+      where:[{
+        name
+      }]
+    });
+    return findCategory || null;
+  }
 }
 
 export default CategoryRepository;

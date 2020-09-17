@@ -58,6 +58,7 @@ export default class CerateProviders1588794248185
             name: 'is_active',
             type: 'boolean',
             isNullable: true,
+            default: true
           },
 
         ],

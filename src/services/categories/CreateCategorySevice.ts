@@ -15,14 +15,12 @@ class CreateCategoryService {
     const categoryRepository = getCustomRepository(CategoryRepository);
     const nameUperCase = name.toUpperCase();
 
-    const findCategorySomeName = await categoryRepository.findByName(
+    const findCategorySomeName = await categoryRepository.findByExactName(
       nameUperCase,
     );
 
-    if (findCategorySomeName != null) {
-      if (findCategorySomeName.length > 0) {
+    if (findCategorySomeName) {
         throw new AppError('Uma categoria com esse nome já foi cadastrada', 400);
-      }
     }
 
     const category = categoryRepository.create({

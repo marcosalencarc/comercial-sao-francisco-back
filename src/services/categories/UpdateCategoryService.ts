@@ -24,14 +24,12 @@ class UpdateCategoryService {
     }
 
 
-    const findCategorySomeName = await categoryRepository.findByName(
+    const findCategorySomeName = await categoryRepository.findByExactName(
       name.toUpperCase(),
     );
 
-    if (findCategorySomeName != null) {
-      if (findCategorySomeName.length > 0) {
+    if (findCategorySomeName) {
         throw new AppError('Uma categoria com esse nome já foi cadastrada', 400);
-      }
     }
 
     findCategory.name = name.toUpperCase()

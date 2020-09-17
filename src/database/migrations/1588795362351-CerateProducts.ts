@@ -13,10 +13,10 @@ export default class CerateProducts1588795362351 implements MigrationInterface {
         columns: [
           {
             name: 'id',
-            type: 'int',
-            generationStrategy: 'increment',
+            type: 'integer', // instead of 'int', required for the increment strategy
             isPrimary: true,
-            isUnique: true,
+            isGenerated: true,
+            generationStrategy: 'increment'
           },
           {
             name: 'name',
@@ -26,6 +26,7 @@ export default class CerateProducts1588795362351 implements MigrationInterface {
             name: 'is_active',
             type: 'boolean',
             isNullable: true,
+            default: true,
           },
         ],
       }),

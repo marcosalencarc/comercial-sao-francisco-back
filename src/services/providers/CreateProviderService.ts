@@ -58,8 +58,8 @@ class CreateProviderService {
     }
 
     if(!StringUtil.isNullOrEmpty(name)){
-      const findCategory = await categoryRepository.findByName(name.toUpperCase())
-      if(findCategory && !ArrayUtil.isNullOrEmpty(findCategory)) return findCategory[0];
+      const findCategory = await categoryRepository.findByExactName(name.toUpperCase())
+      if(findCategory) return findCategory;
     }
 
     return createCategoryService.execute({name:name})

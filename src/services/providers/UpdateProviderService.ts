@@ -57,8 +57,8 @@ class UpdateProviderService {
         const categoryRepository = getCustomRepository(CategoryRepository);
 
         if(!StringUtil.isNullOrEmpty(name)){
-            const findCategory = await categoryRepository.findByName(name.toUpperCase())
-            if(findCategory && !ArrayUtil.isNullOrEmpty(findCategory)) return findCategory[0];
+            const findCategory = await categoryRepository.findByExactName(name.toUpperCase())
+            if(findCategory) return findCategory;
             else{
                 const createCategoryService = new CreateCategoryService()
                 return await createCategoryService.execute({name})
