@@ -14,12 +14,6 @@ class Product {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column()
-  name: string;
-
-  @Column()
-  description: string;
-
   @ManyToOne(() => Category)
   @JoinColumn({ name: 'category_id' })
   category: Category;
@@ -33,16 +27,22 @@ class Product {
   brand: Brand;
   
   @Column()
+  name: string;
+
+  @Column()
+  description: string;
+  
+  @Column()
   reference: string;
 
   @Column()
-  min_inventory: string;
+  min_inventory: number;
 
   @Column()
-  max_inventory: string;
+  max_inventory: number;
 
   @Column()
-  current_inventory: string;
+  current_inventory: number;
 
   @Column()
   weight: number;
@@ -58,12 +58,6 @@ class Product {
 
   @Column()
   retail: number;
-
-  @Column()
-  suggested_price: number;
-
-  @Column()
-  discount: number;
 
   @Column()
   commission: number;

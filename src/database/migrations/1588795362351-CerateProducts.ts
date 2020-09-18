@@ -53,16 +53,6 @@ export default class CerateProducts1588795362351 implements MigrationInterface {
             isNullable: true,
           },
           {
-            name: 'category_id',
-            type: 'int',
-            isNullable: true,
-          },
-          {
-            name: 'provider_id',
-            type: 'uuid',
-            isNullable: true,
-          },
-          {
             name: 'reference',
             type: 'varchar',
             isNullable: true,
@@ -84,10 +74,6 @@ export default class CerateProducts1588795362351 implements MigrationInterface {
             type: 'numeric',
           },
           {
-            name: 'brand_id',
-            type: 'int',
-          },
-          {
             name: 'markup',
             type: 'numeric',
           },
@@ -102,15 +88,6 @@ export default class CerateProducts1588795362351 implements MigrationInterface {
           },
           {
             name: 'retail',
-            type: 'numeric',
-            isNullable: true,
-          },
-          {
-            name: 'suggested_price',
-            type: 'numeric',
-          },
-          {
-            name: 'discount',
             type: 'numeric',
             isNullable: true,
           },
@@ -131,6 +108,7 @@ export default class CerateProducts1588795362351 implements MigrationInterface {
           {
             name: 'is_active',
             type: 'boolean',
+            default: true
           },
           {
             name: 'created_at',
@@ -141,6 +119,20 @@ export default class CerateProducts1588795362351 implements MigrationInterface {
             name: 'updated_at',
             type: 'timestamp',
             default: 'now()',
+          },
+          {
+            name: 'category_id',
+            type: 'int',
+            isNullable: true,
+          },
+          {
+            name: 'provider_id',
+            type: 'uuid',
+            isNullable: true,
+          },
+          {
+            name: 'brand_id',
+            type: 'int',
           },
         ],
       }),
@@ -154,6 +146,7 @@ export default class CerateProducts1588795362351 implements MigrationInterface {
         referencedColumnNames: ['id'],
         referencedTableName: 'categories',
         onUpdate: 'CASCADE',
+        onDelete: 'SET NULL'
       }),
     );
 
@@ -165,6 +158,7 @@ export default class CerateProducts1588795362351 implements MigrationInterface {
         referencedColumnNames: ['id'],
         referencedTableName: 'providers',
         onUpdate: 'CASCADE',
+        onDelete: 'SET NULL'
       }),
     );
 
