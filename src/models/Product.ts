@@ -25,13 +25,13 @@ class Product {
   @ManyToOne(() => Brand)
   @JoinColumn({ name: 'brand_id' })
   brand: Brand;
-  
+
   @Column()
   name: string;
 
   @Column()
   description: string;
-  
+
   @Column()
   reference: string;
 
@@ -63,7 +63,7 @@ class Product {
   commission: number;
 
   @Column()
-  note: number;
+  note: string;
 
   @Column()
   product_img: string;

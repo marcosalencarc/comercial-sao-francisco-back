@@ -9,6 +9,14 @@ class ProductRepository extends Repository<Product> {
     });
     return findProduct || null;
   }
+
+  public async findAll(): Promise<Product[]| null>{
+    const findProducts = await this.find({
+      where: {is_active:true},
+      relations: ['category', 'provider', 'brand']
+    });
+    return findProducts
+  }
 }
 
 export default ProductRepository;
