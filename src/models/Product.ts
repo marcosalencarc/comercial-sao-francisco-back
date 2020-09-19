@@ -14,38 +14,38 @@ class Product {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
+  @ManyToOne(() => Category)
+  @JoinColumn({ name: 'category_id' })
+  category: Category;
+
+  @ManyToOne(() => Provider, {cascade: ["update", "remove"]})
+  @JoinColumn({ name: 'provider_id'})
+  provider: Provider;
+
+  @ManyToOne(() => Brand)
+  @JoinColumn({ name: 'brand_id' })
+  brand: Brand;
+
   @Column()
   name: string;
 
   @Column()
   description: string;
 
-  @ManyToOne(() => Category)
-  @JoinColumn({ name: 'category_id' })
-  category: Category;
-
-  @ManyToOne(() => Provider)
-  @JoinColumn({ name: 'provider_id' })
-  provider: Provider;
-
   @Column()
   reference: string;
 
   @Column()
-  min_inventory: string;
+  min_inventory: number;
 
   @Column()
-  max_inventory: string;
+  max_inventory: number;
 
   @Column()
-  current_inventory: string;
+  current_inventory: number;
 
   @Column()
   weight: number;
-
-  @ManyToOne(() => Brand)
-  @JoinColumn({ name: 'brand_id' })
-  brand: Brand;
 
   @Column()
   markup: number;
@@ -60,22 +60,19 @@ class Product {
   retail: number;
 
   @Column()
-  suggested_price: number;
-
-  @Column()
-  discount: number;
-
-  @Column()
-  commission: number;
-
-  @Column()
-  note: number;
+  note: string;
 
   @Column()
   product_img: string;
 
   @Column()
   is_active: boolean;
+
+  @Column()
+  created_at: Date;
+
+  @Column()
+  updated_at: Date;
 }
 
 export default Product;

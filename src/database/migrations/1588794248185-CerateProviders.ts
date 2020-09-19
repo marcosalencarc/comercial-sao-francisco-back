@@ -23,10 +23,6 @@ export default class CerateProviders1588794248185
             name: 'name',
             type: 'varchar',
           },
-          {
-            name: 'description',
-            type: 'varchar',
-          },
         ],
       }),
     );
@@ -56,7 +52,15 @@ export default class CerateProviders1588794248185
           {
             name: 'category_id',
             type: 'int',
+            isNullable: true,
           },
+          {
+            name: 'is_active',
+            type: 'boolean',
+            isNullable: true,
+            default: true
+          },
+
         ],
       }),
     );
@@ -68,6 +72,7 @@ export default class CerateProviders1588794248185
         referencedColumnNames: ['id'],
         referencedTableName: 'categories',
         onUpdate: 'CASCADE',
+        onDelete: 'SET NULL'
       }),
     );
   }

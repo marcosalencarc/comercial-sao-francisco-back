@@ -12,10 +12,19 @@ class CategoryRepository extends Repository<Category> {
     return findCategory || null;
   }
 
-  public async findById(id: string): Promise<Category | null> {
+  public async findById(id: number): Promise<Category | null> {
     const findCategory = await this.findOne({
       where:[{
         id
+      }]
+    });
+    return findCategory || null;
+  }
+
+  public async findByExactName(name: string): Promise<Category | null> {
+    const findCategory = await this.findOne({
+      where:[{
+        name
       }]
     });
     return findCategory || null;

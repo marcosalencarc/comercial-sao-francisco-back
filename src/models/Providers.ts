@@ -21,6 +21,9 @@ class Provider {
   @Column()
   company_name: string;
 
+  @Column()
+  is_active: boolean
+
   @ManyToOne(() => Category)
   @JoinColumn({ name: 'category_id' })
   category: Category;
