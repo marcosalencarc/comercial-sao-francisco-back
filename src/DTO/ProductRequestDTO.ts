@@ -12,7 +12,6 @@ interface ProductRequestDTO{
 	  cost: number
 	  wholesale: number
 	  retail: number
-	  commission: number
 	  note:string
 	  category:DomainRequestDTO
 	  brand: DomainRequestDTO

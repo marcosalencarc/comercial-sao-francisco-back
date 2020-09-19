@@ -60,9 +60,6 @@ class Product {
   retail: number;
 
   @Column()
-  commission: number;
-
-  @Column()
   note: string;
 
   @Column()

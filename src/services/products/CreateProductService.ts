@@ -14,8 +14,6 @@ class CreateProductService{
     const brandRepository = getCustomRepository(BrandRepository);
     const providerRepository = getCustomRepository(ProviderRepository);
 
-    //TODO: Posso enviar uma categoria sem o id para pode cadastrar ?
-
     const findCategory = await categoryRepository.findById(params.category.id);
     if(!findCategory)
       throw new AppError("Categoria não encontrada, tente novamente", 400)
@@ -26,7 +24,7 @@ class CreateProductService{
 
     const findProvider = await providerRepository.findById(params.provider_id)
     if(!findProvider)
-      throw new AppError("Forncedor não encontrado, tente novamente", 400)
+      throw new AppError("Fornecedor não encontrado, tente novamente", 400)
 
     const product = productRepository.create({
       name: params.name,
@@ -40,7 +38,6 @@ class CreateProductService{
       cost: params.cost,
       wholesale: params.wholesale,
       retail: params.retail,
-      commission: params.commission,
       note: params.note,
       product_img: params.product_img,
       category: findCategory,
