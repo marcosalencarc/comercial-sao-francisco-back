@@ -7,24 +7,19 @@ import AppError from '../../errors/AppErro';
 import CreateCategoryService from '../categories/CreateCategorySevice';
 import Category from '../../models/Category';
 import StringUtil from '../../util/string.util';
-import ArrayUtil from '../../util/array.util';
-
-interface CategoryDTO{
-  id: number,
-  name: string
-}
-
-interface RequestDTO {
-  fantasy_name: string;
-  cpf_cnpj: string;
-  company_name: string;
-  category: CategoryDTO;
-}
+import ProviderRequestDTO from '../../DTO/ProviderRequestDTO';
+import DomainRequestDTO from '../../DTO/DomainRequestDTO';
 
 class CreateProviderService {
-  public async execute({fantasy_name, cpf_cnpj, company_name, category}: RequestDTO): Promise<Provider> {
+  public async execute({ fantasy_name, cpf_cnpj, company_name, category }: ProviderRequestDTO): Promise<Provider> {
     const providerRepository = getCustomRepository(ProviderRepository);
-    
+
+    const categoryRepository = getCustomRepository(CategoryRepository);
+
+    const findCategory = await categoryRepository.findById(category.id)
+    if (!findCategory)
+      throw new AppError('Categoria não encontrada', 400);
+
     const findProvider = await providerRepository.findByCpfCnpj(
       cpf_cnpj,
     );
@@ -33,37 +28,17 @@ class CreateProviderService {
       throw new AppError('Já existe um fornecedor cadastrado com esse CPF/CNPJ', 400);
     }
 
-    const categoryPersist = await this.getCategory(category)
-
     const provider = providerRepository.create({
       fantasy_name,
       cpf_cnpj,
       company_name,
-      category: categoryPersist
+      category: findCategory
     })
 
-    
+
     await providerRepository.save(provider);
 
     return provider;
-  }
-
-  private async getCategory({id, name}: CategoryDTO): Promise<Category>{
-    const categoryRepository = getCustomRepository(CategoryRepository);
-    const createCategoryService = new CreateCategoryService()
-    
-    if(id != undefined && id !=null){
-      const findCategory = await categoryRepository.findById(id)
-      if(findCategory) return findCategory;
-    }
-
-    if(!StringUtil.isNullOrEmpty(name)){
-      const findCategory = await categoryRepository.findByExactName(name.toUpperCase())
-      if(findCategory) return findCategory;
-    }
-
-    return createCategoryService.execute({name:name})
-
   }
 }
 

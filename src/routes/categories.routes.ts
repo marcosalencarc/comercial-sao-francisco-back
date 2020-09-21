@@ -7,15 +7,13 @@ import UpdateCategoryService from "../services/categories/UpdateCategoryService"
 
 const categoriesRouter= Router()
 
-
-// TODO: Fazer a documentação no código 
+// TODO: Fazer a documentação no código
 
 categoriesRouter.get('/', async (request, response) => {
   const categoryRepository = getCustomRepository(CategoryRepository);
   const name = request.query.name != undefined ? request.query.name.toString() : "";
   return name != "" ? response.json(await categoryRepository.findByName(name)) : response.json(await categoryRepository.find());
 });
-
 
 categoriesRouter.post('/', async (request,response) =>{
   const {name} = request.body
@@ -48,7 +46,6 @@ categoriesRouter.patch('/:id', async (request, response) => {
   const categoryUpdate = await updateCategoryService.execute({id,name})
 
   return response.json(categoryUpdate)
-
 
 })
 

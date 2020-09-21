@@ -92,10 +92,6 @@ export default class CerateProducts1588795362351 implements MigrationInterface {
             isNullable: true,
           },
           {
-            name: 'commission',
-            type: 'numeric',
-          },
-          {
             name: 'note',
             type: 'varchar',
             isNullable: true,

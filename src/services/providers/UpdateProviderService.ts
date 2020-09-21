@@ -26,25 +26,26 @@ interface RequestDTO {
 class UpdateProviderService {
     public async execute({id,fantasy_name, cpf_cnpj, company_name, category}: RequestDTO): Promise<Provider> {
         const providerRepository = getCustomRepository(ProviderRepository);
-
+        const categoryRepository = getCustomRepository(CategoryRepository);
         if (!isUuid(id)) throw new AppError('ID é invalido', 400);
-        
+
         const findProvider = await providerRepository.findById(id);
 
         if(!findProvider){
             throw new AppError("Fornecedor não encontrado", 400)
         }
-        
+
         const findProviderWithSameCpfCnpj = await providerRepository.findByCpfCnpj(cpf_cnpj);
-        
+
         if(findProviderWithSameCpfCnpj && findProviderWithSameCpfCnpj.cpf_cnpj != cpf_cnpj){
             throw new AppError("Já existe um fornecedor com o mesmo CPF/CNPJ cadastrado", 400)
         }
 
-        const categoryPersist = await this.updateCategory(category.name);
+        const categoryPersist = await categoryRepository.findById(category.id)
+        if(!categoryPersist)
+          throw new AppError("Categoria não encontrada", 400)
 
-
-        findProvider.category = categoryPersist 
+        findProvider.category = categoryPersist
         findProvider.fantasy_name = fantasy_name;
         findProvider.cpf_cnpj = cpf_cnpj;
         findProvider.company_name = company_name;
@@ -53,20 +54,6 @@ class UpdateProviderService {
 
     }
 
-    public async updateCategory(name: string): Promise<Category>{
-        const categoryRepository = getCustomRepository(CategoryRepository);
-
-        if(!StringUtil.isNullOrEmpty(name)){
-            const findCategory = await categoryRepository.findByExactName(name.toUpperCase())
-            if(findCategory) return findCategory;
-            else{
-                const createCategoryService = new CreateCategoryService()
-                return await createCategoryService.execute({name})
-            }
-        } else {
-            throw new AppError('O nome da categoria está inválido', 400);
-        }
-    }
 }
 
 export default UpdateProviderService;
