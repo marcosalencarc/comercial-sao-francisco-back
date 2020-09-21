@@ -1,4 +1,4 @@
-import { request, response, Router } from 'express';
+import { Router } from 'express';
 import { getCustomRepository } from 'typeorm';
 import ProductRequestDTO from '../DTO/ProductRequestDTO';
 import ProductRepository from '../repositories/ProductRepository';
@@ -7,6 +7,7 @@ import uploadConfig from '../config/upload';
 import CreateProductService from '../services/products/CreateProductService';
 import UpdateProductService from '../services/products/UpdateProductService';
 import DeleteProductService from '../services/products/DeleteProductService';
+import UpdateProductImageService from '../services/products/UpdateProductImageService';
 
 const productsRouter = Router();
 
@@ -26,6 +27,15 @@ productsRouter.post('/', async (request, response) => {
   return response.json(product);
 });
 
+productsRouter.patch('/picture', upload.single('product_img'), async (request, response) =>{
+  const {product_id} = request.body
+
+  const updateProductImageService = new UpdateProductImageService()
+  const product = await updateProductImageService.execute({product_id, product_file_name: request.file.filename})
+  
+  return response.json(product)
+})
+
 productsRouter.patch('/:id', async (request, response) => {
   const {id} = request.params
   const params: ProductRequestDTO = request.body
@@ -41,8 +51,5 @@ productsRouter.delete('/:id', async (request, response) =>{
   return response.status(204).send()
 });
 
-productsRouter.patch('/picture', upload.single('product_img'), async (request, response) =>{
-  return response.json({ok: true})
-})
 
 export default productsRouter;
